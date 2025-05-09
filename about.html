@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FDEV | The Fool's Page</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 2rem;
+      color: #0ff;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    h1 {
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      max-width: 800px;
+      margin-bottom: 40px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 15px;
+    }
+
+    .box {
+      background: #111;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #0ff3;
+      transition: 0.2s;
+    }
+
+    .box.opened {
+      background: #0ff3;
+      color: #000;
+      pointer-events: none;
+    }
+
+    .box.bomb {
+      background: #f00;
+      color: #fff;
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .mock {
+      margin-top: 30px;
+      color: #f00;
+      font-style: italic;
+    }
+
+    .count {
+      margin-top: 10px;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="logo">FDEV</a>
+
+  <h1>Welcome to the Realm of The Fool</h1>
+
+  <div class="intro">
+    <p>Hello, wanderer. Welcome to the sacred grounds of <strong>FDEV</strong> — the most advanced, and god like platform ever conceived...</p>
+    <p>...by a total lunatic. Yes, the legendary creator known only as <strong>The Fool</strong> 🤡</p>
+    <p>This website? Built by shadows of caffeine, bits of chaos, and the whispered cries of abandoned projects.</p>
+    <p>But YOU... yes, YOU have a shot to own it all. Yes thats right win eveythig just by a single Game... ALL you have do is just win and this webiste will be yours...</p>
+    <p>Alright, genius. Here's how this ‘game’ works — not that you stand a chance. There are nine boxes. One — yes, just one — has a bomb in it. The rest? Safe. Your job, or shall I say... your delusion, is to open all eight safe boxes without hitting the boom-box.</p>
+    <p>Reward- ownership of Fdev</p>
+</div>
+
+  <div class="grid" id="gameGrid"></div>
+
+  <div class="mock" id="mockMessage"></div>
+  <div class="count">Games Played: <span id="playCount">0</span></div>
+
+  <script>
+    const grid = document.getElementById('gameGrid');
+    const mockMessage = document.getElementById('mockMessage');
+    const playCountSpan = document.getElementById('playCount');
+
+    let playCount = 0;
+    const mocks = [
+      "Haha! a low life dare to challenge the greatness of Mr fool",
+      "Oh no... not again. well what can i expect",
+      "Impressive...ly bad luck!",
+      "Maybe try another career? ",
+      "You're making The Fool proud. Of your failures."
+    ];
+
+    function setupGame() {
+      grid.innerHTML = '';
+      mockMessage.innerText = '';
+      let bombIndex = Math.floor(Math.random() * 9);
+      let opened = 0;
+
+      for (let i = 0; i < 9; i++) {
+        const box = document.createElement('div');
+        box.classList.add('box');
+        box.dataset.index = i;
+        box.addEventListener('click', () => {
+          if (i === bombIndex) {
+            box.classList.add('bomb');
+            box.innerText = '💥';
+            playCount++;
+            playCountSpan.innerText = playCount;
+            mockMessage.innerText = mocks[Math.floor(Math.random() * mocks.length)];
+            setTimeout(setupGame, 2000);
+          } else {
+            box.classList.add('opened');
+            box.innerText = '✅';
+            opened++;
+            if (opened === 8) {
+              // Never allow 8 opens without bomb
+              bombIndex = i; // Make the 9th a bomb
+            }
+          }
+        });
+        grid.appendChild(box);
+      }
+    }
+
+    setupGame();
+  </script>
+</body>
+</html>

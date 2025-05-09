@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDEV | Features</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 60px;
+            background: #000;
+            z-index: 10;
+            position: relative;
+        }
+
+        header .logo {
+            font-size: 2rem;
+            color: #0ff;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: #0ff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        .btn-signing-main {
+            background: none;
+            border: 2px solid #0ff;
+            color: #0ff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signing-main:hover {
+            background-color: #0ff;
+            color: #000;
+            box-shadow: 0 0 15px #0ff;
+        }
+
+        .features-section {
+            padding: 80px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-heading {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #0ff;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-panel {
+            background: #111;
+            border: 2px solid #0ff;
+            border-radius: 15px;
+            padding: 20px;
+            color: #0ff;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-panel:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+            background-color: #0ff1;
+            color:#d0ff00;
+        }
+
+        .feature-panel h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .feature-panel p {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        #bubbleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bubbleCanvas"></canvas>
+
+    <header>
+        <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">FDEV</h1>
+        <nav>
+            <a data-aos="fade-down" data-aos-duration="1500" href="index.html">Home</a>
+            <a data-aos="fade-down" data-aos-duration="2500" href="developers.html">Developers</a>
+            <a data-aos="fade-down" data-aos-duration="3000" href="about.html">About</a>
+        </nav>
+        <a href="signin.html" data-aos="fade-down" data-aos-duration="1500" class="btn-signing-main">Sign in</a>
+    </header>
+
+    <section class="features-section">
+        <h2 class="features-heading">🔥 Platform Features</h2>
+        <div class="features-grid">
+            <a href="#" class="feature-panel">
+                <h3>Smart Matching</h3>
+                <p>Automatically match with the right developer or client based on skills, needs, and project type.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Live Collaboration</h3>
+                <p>Real-time chat, code editing, and task tracking for smoother teamwork.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Skill Badging</h3>
+                <p>Earn badges based on verified projects, client reviews, and community ratings.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Custom Profiles</h3>
+                <p>Design your profile like a portfolio to showcase work, skills, and achievements.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>AI Project Estimator</h3>
+                <p>Quickly get estimates on time, complexity, and cost using AI analysis.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Instant Proposals</h3>
+                <p>Generate sleek proposals with auto-filled templates tailored to client needs.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Secure Payment</h3>
+                <p>Built-in escrow and payment protection system for safe transactions.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Community Q&A</h3>
+                <p>Ask questions, share tips, or host code reviews with the FDEV community.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Project Marketplace</h3>
+                <p>Browse and bid on curated freelance projects tailored to your skills.</p>
+            </a>
+            <a href="#" class="feature-panel">
+                <h3>Verified Clients</h3>
+                <p>Only work with verified, legit clients with transparent histories and ratings.</p>
+            </a>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        const canvas = document.getElementById('bubbleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let bubbles = [];
+
+        class Bubble {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.radius = Math.random() * 20 + 10;
+                this.speed = Math.random() * 2 + 1;
+                this.alpha = 1;
+            }
+
+            update() {
+                this.y -= this.speed;
+                this.alpha -= 0.001;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.fill();
+            }
+
+            isPopped(mouseX, mouseY) {
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                return Math.sqrt(dx * dx + dy * dy) < this.radius;
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bubbles.forEach((bubble, index) => {
+                bubble.update();
+                bubble.draw();
+                if (bubble.alpha <= 0) {
+                    bubbles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        setInterval(() => {
+            bubbles.push(new Bubble());
+        }, 400);
+
+        canvas.addEventListener('click', (e) => {
+            const sound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/16/audio_d4bcf54c6b.mp3?filename=pop-94319.mp3');
+            bubbles = bubbles.filter(b => {
+                if (b.isPopped(e.clientX, e.clientY)) {
+                    sound.play();
+                    return false;
+                }
+                return true;
+            });
+        });
+
+        animate();
+    </script>
+
+</body>
+</html>
+
+
